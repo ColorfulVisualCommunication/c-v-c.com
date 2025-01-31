@@ -3,6 +3,7 @@
 
 # Ignore .env file
 .env
-
+# Ignore .sqlite db file
+db.sqlite3
 # Except this .gitignore file
 !.gitignore
