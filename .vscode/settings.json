@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "./venv/bin/python",  // Path to Python in your virtual environment
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.autopep8Path": "./venv/bin/autopep8",  // Optional, for formatting
+    "python.formatting.yapfPath": "./venv/bin/yapf",          // Optional, for formatting
+    "python.testing.pytestEnabled": true,  // Enable Pytest for unit tests (if needed)
+    "python.testing.unittestEnabled": true // Enable unittest for unit tests (if needed)
+  }
+  
