@@ -16,7 +16,6 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -38,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',  # Add users app to the list of installed apps
+    'portfolio',  # Add portfolio app to the list of installed apps
 ]
 
 MIDDLEWARE = [
@@ -52,11 +53,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'cvc_core.urls'
 
+# Media Settings configured to handle media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_URL = 'login'
+
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates', # set to use Django's built-in template engine.
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], #the templates directory located at the base directory of the project
+        'APP_DIRS': True, # tells Django to look for templates in the templates subdirectory of each installed application
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -84,12 +91,16 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', '5432'),  # Default PostgreSQL port
-        'OPTIONS': {
-            'sslmode': 'require',  # Important for secure connection to Supabase
-        },
     }
 }
 
+
+# Tell Django to use your custom user model:
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+# redirect users to the profile page after login
+LOGIN_REDIRECT_URL = 'profile'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -126,8 +137,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+#STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+handler403 = 'django.views.defaults.permission_denied'
