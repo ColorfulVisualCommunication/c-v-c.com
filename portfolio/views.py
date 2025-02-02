@@ -6,7 +6,7 @@ from .forms import PortfolioForm
 
 # Create your views here.
 def portfolio_home(request):
-    return render(request, 'portfolio/home.html')
+    return render(request, 'portfolio/portfolio_home.html')
 
 # List all projects
 @login_required
@@ -55,7 +55,7 @@ def portfolio_delete(request, project_id):
     if request.method == 'POST':
         project.delete()
         return redirect('portfolio_list')
-    return render(request, 'portfolio/portfolio_delete.html', {'project': project})
+    return render(request, 'portfolio/portfolio_confirm_delete.html', {'project': project})
 
 # Custom login view
 def custom_logout(request):
